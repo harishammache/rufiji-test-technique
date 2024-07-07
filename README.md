@@ -10,4 +10,6 @@ Requirements : Docker
 
 Then, you can find :
 - the project on https://localhost/
-- the phpMyAdmin on http://localhost:8082/
+- the phpMyAdmin on http://localhost:8082/ :
+    - username : root
+    - password : docker1234
