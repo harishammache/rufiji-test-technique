@@ -1,0 +1,19 @@
+.body-content {
+    padding : 70px 50px;
+}
+.container{
+	padding:20px;
+}
+.body-content a{
+    color          : black;
+    text-decoration: none;
+    cursor         : pointer;
+}
+
+.body-content a:hover{
+    color          : black;
+    text-decoration:underline;
+}
+.container img{
+    width: 100%;
+}

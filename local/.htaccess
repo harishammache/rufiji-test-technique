@@ -1,0 +1,66 @@
+## contrôle du cache navigateur - Expire headers
+<ifModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 7200 seconds"
+  ExpiresByType text/html "access plus 7200 seconds"
+  ExpiresByType image/gif "access plus 2592000 seconds"
+  ExpiresByType image/jpeg "access plus 2592000 seconds"
+  ExpiresByType image/png "access plus 2592000 seconds"
+  ExpiresByType text/css "access plus 604800 seconds"
+  ExpiresByType text/javascript "access plus 216000 seconds"
+  ExpiresByType application/x-javascript "access plus 216000 seconds"
+</ifModule>
+
+<ifModule mod_headers.c>
+  <filesMatch "\\.(ico|pdf|flv|jpg|jpeg|png|gif|swf)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </filesMatch>
+  <filesMatch "\\.(css)$">
+    Header set Cache-Control "max-age=604800, public"
+  </filesMatch>
+  <filesMatch "\\.(js)$">
+    Header set Cache-Control "max-age=216000, private"
+  </filesMatch>
+  <filesMatch "\\.(xml|txt)$">
+    Header set Cache-Control "max-age=216000, public, must-revalidate"
+  </filesMatch>
+  <filesMatch "\\.(html|htm|php)$">
+    Header set Cache-Control "max-age=600, private, must-revalidate"
+  </filesMatch>
+</ifModule>
+
+<ifModule mod_headers.c>
+  Header unset ETag
+</ifModule>
+FileETag None
+
+<ifModule mod_headers.c>
+  Header unset Last-Modified
+</ifModule>
+
+# Activation du mod rewrite d'Apache
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+
+RewriteRule ^/ /index.php?lang=$1&f=home&a=index [L,QSA]
+
+####################
+####  Exercice  ####
+####################
+RewriteRule ^exercice-algo$ /index.php?f=exercice&a=exercicealgo [L,QSA]
+RewriteRule ^exercice-algo/$ /exercice-algo [L,QSA,R=301]
+
+RewriteRule ^exercice-coingecko$ /index.php?f=exercice&a=exercicecoingecko [L,QSA]
+RewriteRule ^exercice-coingecko/$ /exercice-coingecko [L,QSA,R=301]
+
+RewriteRule ^exercice-article$ /index.php?f=exercice&a=exercicearticle [L,QSA]
+RewriteRule ^exercice-article/$ /exercice-article [L,QSA,R=301]
+
+RewriteRule ^exercice$ /index.php?f=exercice&a=exercice [L,QSA]
+RewriteRule ^exercice/$ /exercice [L,QSA,R=301]
