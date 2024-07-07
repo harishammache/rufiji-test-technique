@@ -32,7 +32,7 @@ services:
     image: mariadb
     volumes:
       - ./mysql-dump/dump.sql:/docker-entrypoint-initdb.d/dump.sql
-      #- ./mysql-dump:/docker-entrypoint-initdb.d
+      - ./mysql-dump:/docker-entrypoint-initdb.d
       - ./mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: docker1234
