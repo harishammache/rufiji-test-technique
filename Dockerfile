@@ -47,9 +47,9 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update &&\
     apt-get install --no-install-recommends --assume-yes --quiet ca-certificates curl git &&\
     rm -rf /var/lib/apt/lists/*
-RUN curl -Lsf 'https://storage.googleapis.com/golang/go1.11.6.linux-arm64.tar.gz' | tar -C '/usr/local' -xvzf -
+RUN curl -Lsf 'https://golang.org/dl/go1.22.5.linux-amd64.tar.gz' | tar -C '/usr/local' -xvzf -
 ENV PATH /usr/local/go/bin:$PATH
-RUN go get github.com/mailhog/mhsendmail
+RUN go install github.com/mailhog/mhsendmail@latest
 RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
 RUN apt-get update -y \
   && apt-get install -y \
