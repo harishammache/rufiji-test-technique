@@ -45,7 +45,7 @@ class IndexController extends CommonController{
         $idPost = 1;
 
         $modelExercice = new Exercice();
-        $getInfosPost = $modelExercice->getostById($idPost)[0];
+        $getInfosPost = $modelExercice->getPostById($idPost)[0];
 
         $getInfosPost['author'] = $modelExercice->getAuthorByIdUser(30);
 
