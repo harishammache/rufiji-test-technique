@@ -1,10 +1,10 @@
 <?php
 class Exercice extends CommonModels
 {    
-    public function __construct(){   
+    public function __construct(){
         parent::__construct();
     }
-    
+
     // public function getPostById($idPost){
     //     $pdo    = $this->pdoConnect();
     //     $result = $pdo->prepare("SELECT *
@@ -17,10 +17,9 @@ class Exercice extends CommonModels
     // }
     public function getPostById($idPost){
         $pdo    = $this->pdoConnect();
-        $result = $pdo->prepare("SELECT *
-                                FROM `posts` 
-                                LEFT JOIN `posts_lang` ON `posts`.`id` = `posts_lang`.`post_id`
-                                WHERE `id_post` = :idPost");
+        $result = $pdo->prepare("SELECT * 
+                                FROM posts_lang
+                                WHERE post_id = :idPost");
         $this->bind($result,':idPost', $idPost);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -36,4 +35,3 @@ class Exercice extends CommonModels
         return $result->fetch(PDO::FETCH_ASSOC);
     }
 }
-
