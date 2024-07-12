@@ -1,6 +1,6 @@
 <?php
 class IndexController extends CommonController{
-
+    
     public function __construct(){
         parent::__construct();
         $this->module = 'exercice';
@@ -21,7 +21,7 @@ class IndexController extends CommonController{
         $this->layout['canonical']   = WEBSITE_URL . '/exercice';
         $this->layout['selected']    = 'exercice';
 
-
+        
         parent::setViewInLayout('modules/' . $this->module .'/views/exercice-algo.php');
     }
 
@@ -47,9 +47,9 @@ class IndexController extends CommonController{
         $modelExercice = new Exercice();
         $getInfosPost = $modelExercice->getPostById($idPost)[0];
 
-        $getInfosPost['author'] = $modelExercice->getAuthorByIdUser(30);
+        $getInfosPost['author'] = $modelExercice->getAuthorByIdUser(2);
 
-        $this->view['post'] = $getInfosPost;
+        $this->view['posts'] = $getInfosPost;
 
         parent::setViewInLayout('modules/' . $this->module .'/views/exercice-article.php');
     }
