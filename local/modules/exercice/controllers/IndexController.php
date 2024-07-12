@@ -48,6 +48,7 @@ class IndexController extends CommonController{
         $getInfosPost = $modelExercice->getPostById($idPost)[0];
 
         $getInfosPost['author'] = $modelExercice->getAuthorByIdUser(2);
+        $getInfosPost['comments'] = $modelExercice->getCommentsByPostId($idPost);
 
         $this->view['posts'] = $getInfosPost;
 
