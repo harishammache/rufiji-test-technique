@@ -4,8 +4,8 @@
         <pre>
             <?php print_r($this->view['test']);
                 $apiKey = 'CG-m5vvXranWNDwoM1JwKa12xjW';
-                $url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&x_cg_demo_api_key=$apiKey";
-                $url_usd = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&x_cg_demo_api_key=$apiKey";
+                $url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&sparkline=true&price_change_percentage=24h%2C7d%2C30d&precision=2&x_cg_demo_api_key=$apiKey";
+                $url_usd = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&sparkline=true&price_change_percentage=24h%2C7d%2C30d&precision=2&x_cg_demo_api_key=$apiKey";
                 $data = file_get_contents($url);
                 $data_usd = file_get_contents($url_usd);
                 $cryptos = json_decode($data, true);
@@ -37,9 +37,9 @@
                         <td><?= $crypto['symbol'] ?></td>
                         <td><?= number_format($crypto['current_price'], 2, ',', ' ') ?> €</td>
                         <td><?= number_format($cryptos_usd[$index]['current_price'], 2, ',', ' ') ?> $</td>
-                        <td><?= number_format($crypto['price_change_percentage_24h'], 2) ?> %</td>
-                        <td></td>
-                        <td></td>
+                        <td><?= number_format($crypto['price_change_percentage_24h_in_currency'], 2) ?> %</td>
+                        <td><?= number_format($crypto['price_change_percentage_7d_in_currency'], 2) ?> %</td>
+                        <td><?= number_format($crypto['price_change_percentage_30d_in_currency'], 2) ?> %</td>
                         <td></td>
                     </tr>
                 <?php endforeach; ?>
